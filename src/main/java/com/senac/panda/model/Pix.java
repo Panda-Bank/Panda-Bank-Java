@@ -20,8 +20,8 @@ public class Pix {
 	@NotBlank (message = "Esse campo não pode estar em branco")
 	private String chave;
 	
-	@ManyToOne
-	@JoinColumn(name = "fk_usuario_conta_id_usuario")
-	private long fk_usuario_conta_id_usuario;
+//	@ManyToOne
+//	@JoinColumn(name = "fk_usuario_conta_id_usuario")
+//	private long fk_usuario_conta_id_usuario;
 	
 }

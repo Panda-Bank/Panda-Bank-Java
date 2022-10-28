@@ -21,9 +21,9 @@ public class Poupança {
 	@NotBlank (message = "Poupança não pode estar vazia")
 	private String Poupança;
 	
-    @ManyToOne
-	@JoinColumn(name = "fk_usuario_conta_id_usuario")
-    private long fk_usuario_conta_id_usuario;
+//    @ManyToOne
+//	@JoinColumn(name = "fk_usuario_conta_id_usuario")
+//    private long fk_usuario_conta_id_usuario;
     
 	
 }
