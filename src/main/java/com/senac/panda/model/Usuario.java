@@ -87,6 +87,10 @@ public class Usuario {
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Pix> pix = new ArrayList<>();
 	
+	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"usuarios"})
+	private List<Contatos> contatos = new ArrayList<>();
+	
 
 	public String getNome() {
 		return nome;
