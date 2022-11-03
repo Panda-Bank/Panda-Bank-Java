@@ -15,19 +15,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "avaliacao")
 public class Avaliacoes {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_avaliacao ;
-	
+	private long id_avaliacao;
+
 	@NotBlank(message = "campo classificacao nao pode ser em branco")
 	@Size(min = 5, max = 50)
 	private String classificacao;
-	
+
 	@NotBlank(message = "campo texto nao pode ser em branco")
 	@Size(min = 2, max = 40)
 	private String texto;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("avaliacoes")
@@ -56,6 +56,5 @@ public class Avaliacoes {
 	public void setUsuarios(Usuario usuarios) {
 		this.usuarios = usuarios;
 	}
-	
-	
+
 }

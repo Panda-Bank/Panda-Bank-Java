@@ -78,6 +78,10 @@ public class Usuario {
 	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "usuarios", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({"usuarios"})
+	private List<Poupanca> poupancas = new ArrayList<>();
 
 	public String getNome() {
 		return nome;
