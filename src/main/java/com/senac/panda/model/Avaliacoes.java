@@ -28,11 +28,15 @@ public class Avaliacoes {
 	@Size(min = 2, max = 40)
 	private String texto;
 
+	static private String textoo;
+	
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("avaliacoes")
 	private Usuario usuarios;
 
+	
+	
 	public String getClassificacao() {
 		return classificacao;
 	}
@@ -57,4 +61,4 @@ public class Avaliacoes {
 		this.usuarios = usuarios;
 	}
 
-}
+} 
