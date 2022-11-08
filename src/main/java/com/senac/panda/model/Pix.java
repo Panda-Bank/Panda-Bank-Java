@@ -19,12 +19,38 @@ public class Pix {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_pix;
 	
-	@NotBlank (message = "Esse campo não pode estar em branco")
+	@NotBlank (message = "Campo chave não pode estar em branco")
 	private String chave;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("pix")
 	private Usuario usuarios;
+
+	public long getId_pix() {
+		return id_pix;
+	}
+
+	public void setId_pix(long id_pix) {
+		this.id_pix = id_pix;
+	}
+
+	public String getChave() {
+		return chave;
+	}
+
+	public void setChave(String chave) {
+		this.chave = chave;
+	}
+
+	public Usuario getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Usuario usuarios) {
+		this.usuarios = usuarios;
+	}
+	
+	
 	
 }
