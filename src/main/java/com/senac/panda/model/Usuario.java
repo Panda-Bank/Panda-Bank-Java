@@ -58,10 +58,10 @@ public class Usuario {
 	private String cep;
 	
 	@NotBlank (message = "campo numero enderenço não pode ser em branco")
-	@Size(min = 8, max = 20)
+	@Size(min = 1, max = 20)
 	private String numero_endereco;
 	
-	@Size(min = 8, max = 20)
+	@Size(min = 2, max = 20)
 	private String complemento;
 	
 	@SuppressWarnings("unused")
@@ -72,7 +72,7 @@ public class Usuario {
 	private String agencia;
 	
 	@NotBlank (message = "campo conta não pode ser em branco")
-	@Size(min = 10, max = 10)
+	@Size(min = 5, max = 10)
 	private String conta;
 	
 	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
@@ -91,6 +91,39 @@ public class Usuario {
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Contatos> contatos = new ArrayList<>();
 	
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<Poupanca> getPoupancas() {
+		return poupancas;
+	}
+
+	public void setPoupancas(List<Poupanca> poupancas) {
+		this.poupancas = poupancas;
+	}
+
+	public List<Pix> getPix() {
+		return pix;
+	}
+
+	public void setPix(List<Pix> pix) {
+		this.pix = pix;
+	}
+
+	public List<Contatos> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<Contatos> contatos) {
+		this.contatos = contatos;
+	}
 
 	public String getNome() {
 		return nome;

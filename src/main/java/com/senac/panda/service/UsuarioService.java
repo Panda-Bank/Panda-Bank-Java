@@ -22,4 +22,24 @@ public class UsuarioService {
 		});
 	
 	}
+	
+	
+	public Optional<Usuario> atualizarUsuario(Usuario usuario){
+		return repository.findByCpf(usuario.getCpf()).map(usuarioExistente ->{
+			usuarioExistente.setNome(usuario.getNome());
+			usuarioExistente.setCpf(usuario.getCpf());
+			usuarioExistente.setData_nascimento(usuario.getData_nascimento());
+			usuarioExistente.setEmail(usuario.getEmail());
+			usuarioExistente.setSenha(usuario.getSenha());
+			usuarioExistente.setTelefone(usuario.getTelefone());
+			usuarioExistente.setLogradouro(usuario.getLogradouro());
+			usuarioExistente.setCep(usuario.getCep());
+			usuarioExistente.setNumero_endereco(usuario.getNumero_endereco());
+			usuarioExistente.setComplemento(usuario.getComplemento());
+			return Optional.ofNullable(repository.save(usuarioExistente));					
+		}).orElseGet(() ->{
+			return Optional.empty();
+		});
+	
+	}
 }
