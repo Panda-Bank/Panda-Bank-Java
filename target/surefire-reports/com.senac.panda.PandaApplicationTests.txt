@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.senac.panda.PandaApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.039 s - in com.senac.panda.PandaApplicationTests

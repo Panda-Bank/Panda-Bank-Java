@@ -1,0 +1,10 @@
+com/senac/panda/model/Avaliacoes.class
+com/senac/panda/controller/UsuarioController.class
+com/senac/panda/model/Poupanca.class
+com/senac/panda/model/Usuario.class
+com/senac/panda/model/Pix.class
+com/senac/panda/PandaApplication.class
+com/senac/panda/model/Contatos.class
+com/senac/panda/repository/UsuarioRepository.class
+com/senac/panda/configuration/SwaggerConfig.class
+com/senac/panda/service/UsuarioService.class
