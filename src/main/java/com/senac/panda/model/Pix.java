@@ -17,31 +17,46 @@ public class Pix {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_pix;
+	private long id;
 	
 	@NotBlank (message = "Campo chave não pode estar em branco")
 	private String chave;
+	
+	@NotBlank (message = "Campo chave não pode estar em branco")
+	private String tipoChave;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("pix")
 	private Usuario usuarios;
 
-	public long getId_pix() {
-		return id_pix;
+	public long getId() {
+		return id;
 	}
 
-	public void setId_pix(long id_pix) {
-		this.id_pix = id_pix;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getChave() {
 		return chave;
 	}
 
+	
+
+	public String getTipoChave() {
+		return tipoChave;
+	}
+
+	public void setTipoChave(String tipoChave) {
+		this.tipoChave = tipoChave;
+	}
+
 	public void setChave(String chave) {
 		this.chave = chave;
 	}
+
+
 
 	public Usuario getUsuarios() {
 		return usuarios;
@@ -50,6 +65,7 @@ public class Pix {
 	public void setUsuarios(Usuario usuarios) {
 		this.usuarios = usuarios;
 	}
+
 	
 	
 	
