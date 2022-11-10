@@ -29,7 +29,7 @@ import com.senac.panda.service.UsuarioService;
 
 public class UsuarioController {
 	@Autowired
-	UsuarioRepository repository;
+	private UsuarioRepository repository;
 
 	@Autowired
 	private UsuarioService service;

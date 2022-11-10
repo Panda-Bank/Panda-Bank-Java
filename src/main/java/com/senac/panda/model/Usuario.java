@@ -84,7 +84,7 @@ public class Usuario {
 	private List<Poupanca> poupancas = new ArrayList<>();
 	
 	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties({"usuarios"})
+	@JsonIgnoreProperties("usuarios")
 	private List<Pix> pix = new ArrayList<>();
 	
 	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
