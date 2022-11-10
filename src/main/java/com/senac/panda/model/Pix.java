@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,12 +23,13 @@ public class Pix {
 	@NotBlank (message = "Campo chave não pode estar em branco")
 	private String chave;
 	
-	@NotBlank (message = "Campo chave não pode estar em branco")
-	private String tipoChave;
+	@NotBlank (message = "Campo tipoChave não pode estar em branco")
+	private String tipo;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("pix")
+	@NotNull(message = "Pix não pode ser nulo")
 	private Usuario usuarios;
 
 	public long getId() {
@@ -42,21 +44,18 @@ public class Pix {
 		return chave;
 	}
 
-	
-
-	public String getTipoChave() {
-		return tipoChave;
-	}
-
-	public void setTipoChave(String tipoChave) {
-		this.tipoChave = tipoChave;
-	}
-
 	public void setChave(String chave) {
 		this.chave = chave;
 	}
+	
 
+	public String getTipo() {
+		return tipo;
+	}
 
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 	public Usuario getUsuarios() {
 		return usuarios;
@@ -65,6 +64,10 @@ public class Pix {
 	public void setUsuarios(Usuario usuarios) {
 		this.usuarios = usuarios;
 	}
+
+	
+	
+
 
 	
 	

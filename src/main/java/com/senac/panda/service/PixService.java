@@ -14,13 +14,23 @@ public class PixService {
 	private PixRepository repository;
 	
 	public Optional<Object> cadastrarPix(Pix pix){
-		return repository.findByChaveAndTipoChave(pix.getChave(), pix.getTipoChave()).map(resp ->{
+		return repository.findByChaveAndTipo(pix.getChave(), pix.getTipo()).map(resp ->{
 			return Optional.empty();
 		}).orElseGet(() ->{
 			return Optional.ofNullable(repository.save(pix));
 		});
 	}
 	
+	public Optional<Pix> atualizarPix(Pix pix){
+		return repository.findById(pix.getId()).map(resp ->{
+			resp.setChave(pix.getChave());
+			return Optional.ofNullable(repository.save(resp));
+		}).orElseGet(() ->{
+			return Optional.empty();
+		});
+	}
+	
+
 	
 
 }
