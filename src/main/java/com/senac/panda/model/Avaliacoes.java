@@ -18,47 +18,62 @@ public class Avaliacoes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_avaliacao;
+	private long id;
 
 	@NotBlank(message = "campo classificacao nao pode ser em branco")
-	@Size(min = 5, max = 50)
+	@Size(min = 1, max = 50)
 	private String classificacao;
 
 	@NotBlank(message = "campo texto nao pode ser em branco")
 	@Size(min = 2, max = 40)
 	private String texto;
 
-	static private String textoo;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("avaliacoes")
 	private Usuario usuarios;
 
-	
-	
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 	public String getClassificacao() {
 		return classificacao;
 	}
+
 
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
 	}
 
+
 	public String getTexto() {
 		return texto;
 	}
+
 
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
 
+
 	public Usuario getUsuarios() {
 		return usuarios;
 	}
 
+
 	public void setUsuarios(Usuario usuarios) {
 		this.usuarios = usuarios;
 	}
+
+	
 
 } 
