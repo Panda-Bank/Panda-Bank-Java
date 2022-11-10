@@ -26,11 +26,11 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank(message = "campo classificacao nao pode ser em branco")
+	@NotBlank(message = "campo nome nao pode ser em branco")
 	@Size(min = 5, max =50)
 	private String nome;
 	
-	@NotBlank (message = "campo classificacao nao pode ser em branco")
+	@NotBlank (message = "campo cpf nao pode ser em branco")
 	@Size(min = 7, max = 20 )
 	private String cpf;
 	
@@ -91,7 +91,9 @@ public class Usuario {
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Contatos> contatos = new ArrayList<>();
 	
-	
+	//@OneToMany(mappedBy = "usuarioEnvia", cascade =  CascadeType.REMOVE)
+	//@JsonIgnoreProperties({"usuarioEnvia"})
+	//private List<Transferencia> transferencia = new ArrayList<>();
 
 	public long getId() {
 		return id;

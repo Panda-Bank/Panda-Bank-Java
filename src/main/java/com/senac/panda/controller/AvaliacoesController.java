@@ -40,7 +40,7 @@ public class AvaliacoesController {
 	
 	@PostMapping("/criar")
 	public ResponseEntity<Object> criar(@Valid @RequestBody Avaliacoes avaliacao){
-		return service.cadastrarAvaliacao(avaliacao).map(resp -> ResponseEntity.status(200).body(resp))
+		return service.cadastrarAvaliacao(avaliacao).map(resp -> ResponseEntity.status(201).body(resp))
 				.orElseThrow(() ->{
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 							"Avaliação já existente!.");

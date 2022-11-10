@@ -36,7 +36,7 @@ public class UsuarioController {
 	
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Object> cadastrar(@Valid @RequestBody Usuario usuario) {
-		return service.cadastrarUsuario(usuario).map(retorno -> ResponseEntity.status(200).body(retorno))
+		return service.cadastrarUsuario(usuario).map(retorno -> ResponseEntity.status(201).body(retorno))
 				.orElseThrow(() -> {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 							"Usuario existente, cadastre outro usuario!.");
@@ -48,7 +48,26 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
+	@GetMapping("/id/{id}")
+	public ResponseEntity<Usuario> getById(@PathVariable long id){
+		return repository.findById(id).map(retorno ->ResponseEntity.status(200).body(retorno))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.NO_CONTENT,
+							"Usuario não encontrado, informe um CPF válido!");
+
+				});
 	
+	}
+	@GetMapping("/cpf/{cpf}")
+	public ResponseEntity<Usuario> getByCPF(@PathVariable String cpf){
+		return repository.findByCpf(cpf).map(retorno ->ResponseEntity.status(200).body(retorno))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.NO_CONTENT,
+							"Usuario não encontrado, informe um CPF válido!");
+
+				});
+	
+	}
 	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> atualizar (@RequestBody Usuario usuario){
 		return service.atualizarUsuario(usuario).map(retorno -> ResponseEntity.status(201).body(retorno))
