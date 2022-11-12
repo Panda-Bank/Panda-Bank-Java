@@ -29,7 +29,7 @@ public class Pix {
 	@ManyToOne
 	@JoinColumn(name = "fk_usuario")
 	@JsonIgnoreProperties("pix")
-	@NotNull(message = "Pix não pode ser nulo")
+	@NotNull(message = "campo Pix não pode ser nulo")
 	private Usuario usuarios;
 
 	public long getId() {

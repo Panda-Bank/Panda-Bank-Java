@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.panda.model.Pix;
+import com.senac.panda.model.Transferencia;
+import com.senac.panda.model.Usuario;
 import com.senac.panda.repository.PixRepository;
 import com.senac.panda.service.PixService;
 
@@ -53,6 +55,15 @@ public class PixController {
 							"Pix existente, cadastre outra chave!.");
 
 		});
+	}
+	@PostMapping("/transferir")
+	public ResponseEntity<Transferencia> transferir (@Valid @RequestBody Transferencia transferencia){
+		return service.transferir(transferencia).map(resp -> ResponseEntity.status(200).body(resp))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+							"Pix inexistente, utilize outra chave!.");
+
+				});
 	}
 	@PutMapping("/atualizar")
 	public ResponseEntity<Pix> atualizar (@RequestBody Pix pix){

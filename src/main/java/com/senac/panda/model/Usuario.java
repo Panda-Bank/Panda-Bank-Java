@@ -91,9 +91,10 @@ public class Usuario {
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Contatos> contatos = new ArrayList<>();
 	
-	//@OneToMany(mappedBy = "usuarioEnvia", cascade =  CascadeType.REMOVE)
-	//@JsonIgnoreProperties({"usuarioEnvia"})
-	//private List<Transferencia> transferencia = new ArrayList<>();
+	@OneToMany(mappedBy = "usuario", cascade =  CascadeType.REMOVE)
+	@JsonIgnoreProperties({"usuario"})
+	private List<Transferencia> transferencia = new ArrayList<>();
+	
 
 	public long getId() {
 		return id;
@@ -238,9 +239,15 @@ public class Usuario {
 	public void setAvaliacoes(List<Avaliacoes> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
-	
-	
-	
+
+	public List<Transferencia> getTransferencia() {
+		return transferencia;
+	}
+
+	public void setTransferencia(List<Transferencia> transferencia) {
+		this.transferencia = transferencia;
+	}
+
 	
 	
 	

@@ -2,16 +2,32 @@ package com.senac.panda.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senac.panda.model.Pix;
+import com.senac.panda.model.Transferencia;
+import com.senac.panda.model.Usuario;
 import com.senac.panda.repository.PixRepository;
+import com.senac.panda.repository.TransferenciaRepository;
+import com.senac.panda.repository.UsuarioRepository;
 
 @Service
 public class PixService {
 	@Autowired
 	private PixRepository repository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepo;
+	
+	@Autowired
+	private TransferenciaRepository transferenciaRepo;
+	
+	@Autowired
+	private UsuarioService userService;
+	
 	
 	public Optional<Object> cadastrarPix(Pix pix){
 		return repository.findByChaveAndTipo(pix.getChave(), pix.getTipo()).map(resp ->{
@@ -30,6 +46,25 @@ public class PixService {
 		});
 	}
 	
+	@Transactional
+	public Optional<Transferencia> transferir(Transferencia transferencia){
+		
+		return usuarioRepo.findByPixChave(transferencia.getChave()).map(resp ->{
+			//resp.setSaldo((resp.getSaldo()) + (transferencia.getValor()));
+			
+			transferencia.getUsuario().setSaldo((transferencia.getUsuario().getSaldo()) - (transferencia.getValor()));
+			//usuarioRepo.save(transferencia.getUsuario());
+			//usuarioRepo.save(resp);
+			userService.atualizarSaldo(resp, transferencia.getValor(), true);
+
+			userService.atualizarSaldo(transferencia.getUsuario(), transferencia.getValor(), false);
+			return Optional.ofNullable(transferenciaRepo.save(transferencia));
+			//return Optional.ofNullable(transferenciaRepo.save(transferencia));
+		}).orElseGet(() ->{
+			return Optional.empty();
+		});
+		
+	}
 
 	
 

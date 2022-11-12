@@ -2,6 +2,8 @@ package com.senac.panda.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +44,21 @@ public class UsuarioService {
 		});
 	
 	}
+	
+	@Transactional
+	public Optional<Usuario> atualizarSaldo(Usuario usuario, double valor, boolean adicionar){
+		return repository.findById(usuario.getId()).map(usuarioExistente ->{
+			if(adicionar == true) {
+				usuarioExistente.setSaldo(usuarioExistente.getSaldo() + valor);
+			}else {
+				usuarioExistente.setSaldo(usuarioExistente.getSaldo() - valor);
+			}
+			
+			return Optional.ofNullable(repository.save(usuarioExistente));					
+		}).orElseGet(() ->{
+			return Optional.empty();
+		});
+	
+	}
+	
 }

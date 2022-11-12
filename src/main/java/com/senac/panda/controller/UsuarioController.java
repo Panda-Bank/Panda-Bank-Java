@@ -68,6 +68,16 @@ public class UsuarioController {
 				});
 	
 	}
+	@GetMapping("/chave/{chave}")
+	public ResponseEntity<Usuario> getByChave(@PathVariable String chave){
+		return repository.findByPixChave(chave).map(retorno ->ResponseEntity.status(200).body(retorno))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.NO_CONTENT,
+							"Chave não encontrada, informe uma chave válida!");
+
+				});
+	
+	}
 	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> atualizar (@RequestBody Usuario usuario){
 		return service.atualizarUsuario(usuario).map(retorno -> ResponseEntity.status(201).body(retorno))
