@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senac.panda.email.EmailMessages;
+import com.senac.panda.email.EnviarEmailService;
 import com.senac.panda.model.Pix;
 import com.senac.panda.model.Transferencia;
 import com.senac.panda.model.Usuario;
@@ -18,54 +20,55 @@ import com.senac.panda.repository.UsuarioRepository;
 public class PixService {
 	@Autowired
 	private PixRepository repository;
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepo;
-	
+
+	@Autowired
+	private EnviarEmailService email;
+
 	@Autowired
 	private TransferenciaRepository transferenciaRepo;
-	
+
 	@Autowired
 	private UsuarioService userService;
-	
-	
-	public Optional<Object> cadastrarPix(Pix pix){
-		return repository.findByChaveAndTipo(pix.getChave(), pix.getTipo()).map(resp ->{
+
+	public Optional<Object> cadastrarPix(Pix pix) {
+		return repository.findByChaveAndTipo(pix.getChave(), pix.getTipo()).map(resp -> {
 			return Optional.empty();
-		}).orElseGet(() ->{
+		}).orElseGet(() -> {
 			return Optional.ofNullable(repository.save(pix));
 		});
 	}
-	
-	public Optional<Pix> atualizarPix(Pix pix){
-		return repository.findById(pix.getId()).map(resp ->{
+
+	public Optional<Pix> atualizarPix(Pix pix) {
+		return repository.findById(pix.getId()).map(resp -> {
 			resp.setChave(pix.getChave());
 			return Optional.ofNullable(repository.save(resp));
-		}).orElseGet(() ->{
+		}).orElseGet(() -> {
 			return Optional.empty();
 		});
 	}
-	
+
 	@Transactional
-	public Optional<Transferencia> transferir(Transferencia transferencia){
-		
-		return usuarioRepo.findByPixChave(transferencia.getChave()).map(resp ->{
-			//resp.setSaldo((resp.getSaldo()) + (transferencia.getValor()));
-			
+	public Optional<Transferencia> transferir(Transferencia transferencia) {
+
+		return usuarioRepo.findByPixChave(transferencia.getChave()).map(resp -> {
+			Optional<Usuario> usuarioEnvia = usuarioRepo.findById(transferencia.getUsuario().getId());
+
 			transferencia.getUsuario().setSaldo((transferencia.getUsuario().getSaldo()) - (transferencia.getValor()));
-			//usuarioRepo.save(transferencia.getUsuario());
-			//usuarioRepo.save(resp);
 			userService.atualizarSaldo(resp, transferencia.getValor(), true);
 
 			userService.atualizarSaldo(transferencia.getUsuario(), transferencia.getValor(), false);
-			return Optional.ofNullable(transferenciaRepo.save(transferencia));
-			//return Optional.ofNullable(transferenciaRepo.save(transferencia));
-		}).orElseGet(() ->{
+
+			transferenciaRepo.save(transferencia);
+			email.enviar(usuarioEnvia.get().getEmail(), EmailMessages.createTitle(usuarioEnvia.get()),
+					EmailMessages.mensagemDeTransferencia(transferencia, usuarioEnvia.get()));
+			return Optional.ofNullable(transferencia);
+		}).orElseGet(() -> {
 			return Optional.empty();
 		});
-		
-	}
 
-	
+	}
 
 }
