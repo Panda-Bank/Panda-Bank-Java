@@ -58,12 +58,11 @@ public class PixService {
 
 			transferencia.getUsuario().setSaldo((transferencia.getUsuario().getSaldo()) - (transferencia.getValor()));
 			userService.atualizarSaldo(resp, transferencia.getValor(), true);
-
 			userService.atualizarSaldo(transferencia.getUsuario(), transferencia.getValor(), false);
 
 			transferenciaRepo.save(transferencia);
 			email.enviar(usuarioEnvia.get().getEmail(), EmailMessages.createTitle(usuarioEnvia.get()),
-					EmailMessages.mensagemDeTransferencia(transferencia, usuarioEnvia.get()));
+					EmailMessages.mensagemDeTransferencia(transferencia, resp));
 			return Optional.ofNullable(transferencia);
 		}).orElseGet(() -> {
 			return Optional.empty();
