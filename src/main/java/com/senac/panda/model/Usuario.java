@@ -69,7 +69,8 @@ public class Usuario {
 	
 	@NotBlank (message = "campo agencia não pode ser em branco")
 	@Size(min = 4, max = 4)
-	private String agencia;
+	private String agencia = "1633";
+	
 	
 	@NotBlank (message = "campo conta não pode ser em branco")
 	@Size(min = 5, max = 10)

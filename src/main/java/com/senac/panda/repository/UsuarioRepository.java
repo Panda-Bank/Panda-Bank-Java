@@ -16,4 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	public Optional<Usuario> findByPixChave(String chave);
 
+	public Optional<Usuario> findByConta(String conta);
+	
 }

@@ -1,4 +1,4 @@
-package com.senac.panda;
+	package com.senac.panda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
