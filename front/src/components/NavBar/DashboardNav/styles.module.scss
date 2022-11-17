@@ -1,0 +1,30 @@
+.header {
+    padding-right: 2rem;
+    padding-left: 2rem;
+    width: 100%;
+    background-color: #000;
+    border-radius: 0 0 0.5rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8rem;
+
+    &_nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &_name {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        justify-content: center;
+        color: white;
+
+        p > span {
+            color: var(--blue-300);
+            font-size: 1rem;
+        }
+    }
+}

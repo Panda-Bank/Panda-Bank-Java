@@ -1,0 +1,1 @@
+export { handleChangePage } from './changePage'
