@@ -21,8 +21,9 @@ public class UsuarioService {
 		return repository.findByCpf(usuario.getCpf()).map(usuarioExistente -> {
 			return Optional.empty();
 		}).orElseGet(() -> {
-			 usuario.setConta(geradorConta());
-
+//			 usuario.setConta(geradorConta());
+			usuario.setSenha(CriptografiaService.criptografarMD5(usuario.getSenha()));
+			
 			return Optional.ofNullable(repository.save(usuario));
 		});
 
@@ -44,7 +45,7 @@ public class UsuarioService {
 		// df =new DecimalFormat(padrao);
 
 	}
-
+	@Transactional
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 		return repository.findByCpf(usuario.getCpf()).map(usuarioExistente -> {
 			usuarioExistente.setNome(usuario.getNome());

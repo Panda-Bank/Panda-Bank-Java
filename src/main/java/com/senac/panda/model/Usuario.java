@@ -42,7 +42,7 @@ public class Usuario {
 	private String email;
 	
 	@NotBlank (message = "campo senha não pode ser em branco")
-	@Size(min = 8, max = 20)
+	@Size(min = 8, max = 50)
 	private String senha;
 	
 	@NotBlank (message = "campo telefone não pode ser em branco")
