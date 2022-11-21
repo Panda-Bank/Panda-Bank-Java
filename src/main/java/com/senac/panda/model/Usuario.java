@@ -74,8 +74,8 @@ public class Usuario {
 	
 	@NotBlank (message = "campo conta não pode ser em branco")
 	@Size(min = 5, max = 10)
-	private String conta;
-	
+	private String conta = "32333-7";
+
 	@OneToMany(mappedBy ="usuarios", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({"usuarios"})
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();

@@ -23,7 +23,7 @@ public class UsuarioService {
 		}).orElseGet(() -> {
 			 usuario.setConta(geradorConta());
 
-			return Optional.ofNullable(repository.save(usuario));
+			return Optional.ofNullable((usuario));
 		});
 
 	}
@@ -37,7 +37,7 @@ public class UsuarioService {
 	usuario = repository.findByConta(conta);
 	
 	
-} while (usuario.isPresent());
+} while (usuario.isEmpty());
 		
 		return conta;
 

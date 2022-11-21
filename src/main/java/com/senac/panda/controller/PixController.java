@@ -20,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.panda.model.Pix;
 import com.senac.panda.model.Transferencia;
-import com.senac.panda.model.Usuario;
 import com.senac.panda.repository.PixRepository;
 import com.senac.panda.service.PixService;
 
