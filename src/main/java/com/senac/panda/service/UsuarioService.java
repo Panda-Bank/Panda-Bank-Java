@@ -22,8 +22,10 @@ public class UsuarioService {
 			return Optional.empty();
 		}).orElseGet(() -> {
 			 usuario.setConta(geradorConta());
+			 usuario.setAgencia("1633");
+			 usuario.setSaldo(600);
 
-			return Optional.ofNullable((usuario));
+			return Optional.ofNullable(repository.save(usuario));
 		});
 
 	}
@@ -31,14 +33,11 @@ public class UsuarioService {
 	public String geradorConta() {
 		Optional<Usuario> usuario;
 		String conta;
-		do {
 			Random ale = new Random();
 			conta = Integer.toString(ale.nextInt(100000));
-	usuario = repository.findByConta(conta);
+			usuario = repository.findByConta(conta);
 	
-	
-} while (usuario.isEmpty());
-		
+
 		return conta;
 
 		// df =new DecimalFormat(padrao);
@@ -78,6 +77,12 @@ public class UsuarioService {
 			return Optional.empty();
 		});
 
+	}
+	
+	public Optional<Usuario> logar (Optional<Usuario> usuario){
+		Optional<Usuario> user = repository.findByCpf(usuario.get().getCpf());
+		
+		return user;
 	}
 
 }

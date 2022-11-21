@@ -1,6 +1,7 @@
 package com.senac.panda.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -34,6 +35,12 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	
+	@PostMapping("/logar")
+	public ResponseEntity<Usuario> login(@RequestBody Optional<Usuario> usuario){
+		return service.logar(usuario).map(resp ->
+			ResponseEntity.ok(resp))
+		.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	}
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Object> cadastrar(@Valid @RequestBody Usuario usuario) {
 		return service.cadastrarUsuario(usuario).map(retorno -> ResponseEntity.status(201).body(retorno))
